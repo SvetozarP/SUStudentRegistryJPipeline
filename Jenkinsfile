@@ -19,9 +19,9 @@ pipeline {
             steps {
                 script {
                     echo "Setting up Node.js version ${NODE_VERSION}"
-                    sh "nvm install ${NODE_VERSION} || true"
-                    sh "nvm use ${NODE_VERSION} || true"
-                    sh "node -v"
+                    bat "nvm install ${NODE_VERSION} || true"
+                    bat "nvm use ${NODE_VERSION} || true"
+                    bat "node -v"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     echo 'Installing dependencies...'
-                    sh 'npm install'
+                    bat 'npm install'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     echo 'Starting the application...'
-                    sh 'npm start &'
+                    bat 'npm start &'
                 }
             }
         }
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    sh 'npm test'
+                    bat 'npm test'
                 }
             }
         }
