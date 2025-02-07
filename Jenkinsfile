@@ -15,17 +15,6 @@ pipeline {
             }
         }
 
-        stage('Set Up Node.js') {
-            steps {
-                script {
-                    echo "Setting up Node.js version ${NODE_VERSION}"
-                    bat "nvm install ${NODE_VERSION} || true"
-                    bat "nvm use ${NODE_VERSION} || true"
-                    bat "node -v"
-                }
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 script {
