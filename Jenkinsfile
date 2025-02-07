@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent any  // Runs on any available Windows agent
 
     environment {
         NODE_VERSION = '18'  // Change to your required Node.js version
@@ -11,6 +11,19 @@ pipeline {
                 script {
                     echo 'Checking out the code...'
                     checkout scm
+                }
+            }
+        }
+
+        stage('Set Up Node.js') {
+            steps {
+                script {
+                    echo "Setting up Node.js version ${NODE_VERSION}"
+                    bat """
+                    echo Installing Node.js...
+                    node -v || choco install nodejs --version=${NODE_VERSION} -y
+                    node -v
+                    """
                 }
             }
         }
@@ -28,7 +41,7 @@ pipeline {
             steps {
                 script {
                     echo 'Starting the application...'
-                    bat 'npm start &'
+                    bat 'start /b npm start'
                 }
             }
         }
